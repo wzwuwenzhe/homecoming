@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deady.demo.dao.ClassDAO">
+    
+    <select id="findStudentListByClassId" resultType="com.deady.demo.entity.Student" parameterType="string">
+        SELECT
+            *
+        FROM
+            hc_student
+        WHERE
+            class_id = #{classId}
+        order by code+0
+    </select>
+    
+    <select id="findClassListBySchoolIds" parameterType="java.util.List" resultType="com.deady.demo.entity.Clazz">
+    	select * from hc_class where school_id in
+    	<foreach collection="list" item="str" index="index"
+		       separator=",">
+		       ( #{str})
+		   </foreach>
+    </select>
+
+</mapper>
